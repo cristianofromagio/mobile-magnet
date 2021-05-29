@@ -1,0 +1,44 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Magnet Open</title>
+  <meta name="description" content="Easy open magnet links on mobile">
+  <meta name="author" content="cristianofromagio">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+
+</head>
+
+<body>
+
+<script>
+	function getUrlParam(name) {
+    	name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    	var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    	var results = regex.exec(location.search);
+    	return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+	};
+
+	function clickLink(url) {
+		let el = document.createElement('a');
+		el.href = url;
+		el.innerText = url;
+		document.body.appendChild(el);
+		window.open(url, '_self');
+	};
+
+	let url = getUrlParam('open') || getUrlParam('o') ;
+	let confirmMessage = "Abrindo: ";
+	confirmMessage += url;
+	confirmMessage += "\nContinuar?";
+	
+	if(window.confirm(confirmMessage)) {
+		clickLink(url);
+	}
+</script>
+  
+</body>
+</html>
